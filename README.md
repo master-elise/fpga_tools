@@ -43,6 +43,7 @@ python3 xilinx/python/bbaexport.py \
 	--device xc7z010clg400-1 \
 	--bba xilinx/xc7z010.bba
 bbasm --l xilinx/xc7z010.bba xilinx/xc7z010.bin
+sudo mkdir -p /usr/share/nextpnr/xilinx-chipdb/
 sudo cp xilinx/xc7z010.bin /usr/share/nextpnr/xilinx-chipdb/
 cd ../
 ```
