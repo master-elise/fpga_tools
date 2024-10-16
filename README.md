@@ -34,6 +34,7 @@ Depends on the ``libboost-iostreams-dev`` package:
 ```
 git clone https://github.com/gatecat/nextpnr-xilinx.git
 cd nextpnr-xilinx
+git submodule update --init --recursive
 cmake -DARCH=xilinx -DUSE_OPENMP=ON .
 make 
 sudo make install
@@ -51,3 +52,5 @@ cd ../
 The prefered solution is to use the packaged binary, i.e. for Debian GNU/Linux
 ``sudo apt install openfpgaloader``. If not available, follow instructions at
 https://github.com/trabucayre/openFPGALoader
+
+The JTAG pinout of the Redpitaya is given at https://redpitaya.readthedocs.io/en/latest/_images/JTAG_pins.jpg and is compatible with the Digilent HS2 probe. For transfering the bitstream to the PL of the Zynq: ``openFPGALoader -c digilent_hs2 mybitstream.bit``
