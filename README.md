@@ -1,15 +1,33 @@
 # Compiling free, opensource tools for programming Xilinx FPGAs (e.g. for the Zynq 7010 of the Redpitaya)
 
+Tools: GHDL and GTKWave as binary packages, e.g. ``sudo apt install ghdl gtkwave``
+
+If manually compiling, all ``make`` commands can be parallelized using ``make -j$(ncpu)`` after setting ``ncpu`` to the appropriate value (e.g. number of CPU cores)
+
 ## yosys:
 
 The prefered solution is to use the packaged binary, i.e. for Debian GNU/Linux
-``sudo apt install yosys``. If not available, then
+``sudo apt install yosys yosys-plugin-ghdl``. If not available, then
 
 ```
 git clone https://github.com/YosysHQ/yosys.git
 cd yosys
+git submodule update --init
 make
 sudo make install
+cd ../
+```
+
+## ghdl-yosys-plugin:
+
+``sudo apt install libghdl-dev`` to meet dependencies, and
+
+```
+git clone https://github.com/ghdl/ghdl-yosys-plugin
+cd ghdl-yosys-plugin/
+make
+sudo mkdir -p /usr/local/share/yosys/plugins/
+sudo cp ghdl.so /usr/local/share/yosys/plugins/
 cd ../
 ```
 
