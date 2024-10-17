@@ -22,7 +22,7 @@ cd ../
 
 ``sudo apt install libghdl-dev`` to meet dependencies, and
 
-```
+```sh
 git clone https://github.com/ghdl/ghdl-yosys-plugin
 cd ghdl-yosys-plugin/
 make
@@ -33,7 +33,10 @@ cd ../
 
 ## prjxray:
 
-```
+This directory will be needed even after completing ``make install`` so perform
+these compilation steps in a directory you will keep (e.g. *not* in ``/tmp`` !)
+
+```sh
 git clone https://github.com/SymbiFlow/prjxray.git
 cd prjxray
 make build
