@@ -9,7 +9,7 @@ If manually compiling, all ``make`` commands can be parallelized using ``make -j
 The prefered solution is to use the packaged binary, i.e. for Debian GNU/Linux
 ``sudo apt install yosys yosys-plugin-ghdl``. If not available, then
 
-```
+```sh
 git clone https://github.com/YosysHQ/yosys.git
 cd yosys
 git submodule update --init
@@ -52,7 +52,7 @@ cd ../
 
 Depends on the ``libboost-iostreams-dev`` package:
 
-```
+```sh
 git clone https://github.com/gatecat/nextpnr-xilinx.git
 cd nextpnr-xilinx
 git submodule update --init --recursive
