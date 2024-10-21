@@ -19,6 +19,23 @@ sudo make install
 cd ../
 ```
 
+### ghdl
+
+The preferred solution is to use the packaged ``sudo apt install libghdl-dev`` unless the version of the packaged library is too
+old to support libghdl-dev (error such as ``error: ‘Id_Dlatch’ was not declared in this scope``). If such an error occurs in the
+next step, remove the packaged ``sudo apt remove --purge libghdl-dev``, then install dependency ``sudo apt install gnat`` and
+compile manually:
+
+```sh
+sudo apt install gnat
+git clone https://github.com/ghdl/ghdl
+cd ghdl
+./configure
+make
+sudo make install
+cd ../
+```
+
 ## ghdl-yosys-plugin:
 
 ``sudo apt install libghdl-dev`` to meet dependencies, and
