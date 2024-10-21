@@ -8,7 +8,7 @@ If manually compiling, all ``make`` commands can be parallelized using ``make -j
 
 The prefered solution is to use the packaged binary, i.e. for Debian GNU/Linux
 ``sudo apt install yosys yosys-plugin-ghdl``. If not available, then assuming the dependencies
-``sudo apt install tcl8.6-dev`` is met:
+``sudo apt install tcl8.6-dev libreadline-dev`` is met:
 
 ```sh
 git clone https://github.com/YosysHQ/yosys.git
