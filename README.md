@@ -7,12 +7,30 @@ If manually compiling, all ``make`` commands can be parallelized using ``make -j
 ## yosys:
 
 The prefered solution is to use the packaged binary, i.e. for Debian GNU/Linux
-``sudo apt install yosys yosys-plugin-ghdl``. If not available, then
+``sudo apt install yosys yosys-plugin-ghdl``. If not available, then assuming the dependencies
+``sudo apt install tcl8.6-dev libreadline-dev libffi-dev bison flex`` is met:
 
 ```sh
 git clone https://github.com/YosysHQ/yosys.git
 cd yosys
 git submodule update --init
+make
+sudo make install
+cd ../
+```
+
+### ghdl
+
+The preferred solution is to use the packaged ``sudo apt install libghdl-dev`` unless the version of the packaged library is too
+old to support libghdl-dev (error such as ``error: ‘Id_Dlatch’ was not declared in this scope``). If such an error occurs in the
+next step, remove the packaged ``sudo apt remove --purge libghdl-dev``, then install dependency ``sudo apt install gnat`` and
+compile manually:
+
+```sh
+sudo apt install gnat
+git clone https://github.com/ghdl/ghdl
+cd ghdl
+./configure
 make
 sudo make install
 cd ../
