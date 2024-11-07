@@ -62,7 +62,7 @@ sudo make ALLOW_ROOT=1 install
 ./download-latest-db.sh
 sudo mkdir -p /usr/share/nextpnr
 sudo cp -r database /usr/share/nextpnr/prjxray-db
-pip3 install --user -r requirements.txt --break-system-packages
+pip3 install --user -r requirements.txt # for Debian: add --break-system-packages
 cd ../
 ```
 
@@ -94,3 +94,11 @@ The prefered solution is to use the packaged binary, i.e. for Debian GNU/Linux
 https://github.com/trabucayre/openFPGALoader
 
 The JTAG pinout of the Redpitaya is given at https://redpitaya.readthedocs.io/en/latest/_images/JTAG_pins.jpg and is compatible with the Digilent HS2 probe. For transfering the bitstream to the PL of the Zynq: ``openFPGALoader -c digilent_hs2 mybitstream.bit``
+
+## Update PATH
+
+Once all tools are installed, make sure to update the PATH with ``/usr/local/bin`` and ``$HOME/.local/bin`` e.g. using
+```sh
+export PATH=$PATH:/usr/local/bin:$HOME/.local/bin
+```
+which can be added to ``.bashrc`` to make the modification permanent.
