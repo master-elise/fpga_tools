@@ -1,6 +1,6 @@
 # Compiling free, opensource tools for programming Xilinx FPGAs (e.g. for the Zynq 7010 of the Redpitaya)
 
-Tools: GHDL and GTKWave as binary packages, e.g. ``sudo apt install ghdl gtkwave``
+Tools: GHDL and GTKWave as binary packages, e.g. ``sudo apt install ghdl gtkwave tcl-dev libffi-dev bison flex libboost-dev libboost-iostreams-dev libboost-filesystem-dev libboost-thread-dev libboost-program-options-dev libeigen3-dev``
 
 If manually compiling, all ``make`` commands can be parallelized using ``make -j$(ncpu)`` after setting ``ncpu`` to the appropriate value (e.g. number of CPU cores)
 
