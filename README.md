@@ -63,7 +63,7 @@ sudo make ALLOW_ROOT=1 install
 ./download-latest-db.sh
 sudo mkdir -p /usr/share/nextpnr
 sudo cp -r database /usr/share/nextpnr/prjxray-db
-pip3 install --user -r requirements.txt # for Debian: add --break-system-packages
+pip3 install --user -r requirements.txt # for Debian: add --break-system-packages # add --use-pep517 for Ubuntu
 cd ../
 ```
 
