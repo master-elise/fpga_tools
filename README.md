@@ -94,7 +94,10 @@ The preferred solution is to use the packaged binary, i.e. for Debian GNU/Linux
 ``sudo apt install openfpgaloader``. If not available, follow instructions at
 https://github.com/trabucayre/openFPGALoader
 
-The JTAG pinout of the Redpitaya is given at https://redpitaya.readthedocs.io/en/latest/_images/JTAG_pins.jpg and is compatible with the Digilent HS2 probe. For transfering the bitstream to the PL of the Zynq: ``openFPGALoader -c digilent_hs2 mybitstream.bit``
+The JTAG pinout of the Redpitaya is given at https://redpitaya.readthedocs.io/en/latest/_images/JTAG_pins.jpg and is compatible with the Digilent HS2 probe. For transfering the bitstream to the PL of the Zynq: 
+```bash
+openFPGALoader -c digilent_hs2 mybitstream.bit
+```
 
 ## Update PATH
 
