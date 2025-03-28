@@ -1,6 +1,6 @@
 # Compiling free, opensource tools for programming Xilinx FPGAs (e.g. for the Zynq 7010 of the Redpitaya)
 
-Tools: GHDL and GTKWave as binary packages, e.g. ``sudo apt install ghdl gtkwave``. Some additional dependencies found in this document are
+Tools: GHDL and GTKWave as binary packages, e.g. ``sudo apt install ghdl ghdl-gcc gtkwave``. Some additional dependencies found in this document are
 ```bash
 sudo apt install tcl-dev libffi-dev bison flex libboost-dev libboost-iostreams-dev libboost-filesystem-dev libboost-thread-dev libboost-program-options-dev libeigen3-dev
 ```
