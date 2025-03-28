@@ -10,7 +10,7 @@ If manually compiling, all ``make`` commands can be parallelized using ``make -j
 ## yosys:
 
 The preferred solution is to use the packaged binary, i.e. for Debian GNU/Linux sid
-``sudo apt install yosys yosys-plugin-ghdl``. If not available (e.g. on Debian GNU/Linux stable or testing), 
+``sudo apt install yosys yosys-dev yosys-plugin-ghdl``. If not available (e.g. on Debian GNU/Linux stable or testing), 
 then assuming the dependencies 
 ``sudo apt install tcl8.6-dev libreadline-dev libffi-dev bison flex`` is met:
 
