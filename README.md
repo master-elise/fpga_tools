@@ -1,5 +1,8 @@
 # Compiling free, opensource tools for programming Xilinx FPGAs (e.g. for the Zynq 7010 of the Redpitaya)
 
+The complete yosys installation is 4.7 GB when Vivado/Vitis 2024 requires
+downloading 18 GB and installing 70 GB !
+
 Tools: GHDL and GTKWave as binary packages, e.g. ``sudo apt install ghdl gtkwave``
 
 If manually compiling, all ``make`` commands can be parallelized using ``make -j$(ncpu)`` after setting ``ncpu`` to the appropriate value (e.g. number of CPU cores)
@@ -94,3 +97,6 @@ The prefered solution is to use the packaged binary, i.e. for Debian GNU/Linux
 https://github.com/trabucayre/openFPGALoader
 
 The JTAG pinout of the Redpitaya is given at https://redpitaya.readthedocs.io/en/latest/_images/JTAG_pins.jpg and is compatible with the Digilent HS2 probe. For transfering the bitstream to the PL of the Zynq: ``openFPGALoader -c digilent_hs2 mybitstream.bit``
+
+
+https://downloads.intel.com/akdlm/software/acdsinst/13.1/162/ib_tar/Quartus-web-13.1.0.162-linux.tar
