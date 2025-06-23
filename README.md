@@ -126,3 +126,5 @@ Once compilation is completed, always
 source /opt/openxc7/export.sh
 ```
 before using these tools by selecting the appropriate paths.
+
+Tested with the examples found at https://github.com/openXC7/demo-projects
