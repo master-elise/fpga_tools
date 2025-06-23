@@ -117,6 +117,6 @@ which can be added to ``.bashrc`` to make the modification permanent.
 
 ## Opensource tools for PS access
 
-Gwenhael Goavec-Merou has contributed <a href="openxc7_build_install.sh">automating the
-compilation</a> of the OpenXC7 branch of the tools *which are not the same branch* than selected
-above. 
+Gwenhael Goavec-Merou has contributed <a href="openxc7_build_install.sh">this script</a>
+automating the compilation of the OpenXC7 branch of the tools *which are not the same branch* 
+than selected above. 
