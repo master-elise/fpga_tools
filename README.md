@@ -1,16 +1,22 @@
 # Compiling free, opensource tools for programming Xilinx FPGAs (e.g. for the Zynq 7010 of the Redpitaya)
 
-The complete yosys installation is 4.7 GB when Vivado/Vitis 2024 requires
-downloading 18 GB and installing 70 GB !
+The complete yosys installation is 4.7 GB when Vivado/Vitis 2024 requires downloading 18 GB 
+and installing 70 GB !
 
-Tools: GHDL and GTKWave as binary packages, e.g. ``sudo apt install ghdl gtkwave``
+## Notice: PL (FPGA) only, no access to PS (CPU) with these tools. See <a href="https://fosdem.org/2025/schedule/event/fosdem-2025-4850-all-open-source-toolchain-for-zynq-7000-socs/">GenZ and OpenXC7 (FOSDEM presentation)</a> for PS access with opensource tools.
+
+Tools: GHDL and GTKWave as binary packages, e.g. ``sudo apt install ghdl ghdl-gcc gtkwave``. Some additional dependencies found in this document are
+```bash
+sudo apt install tcl-dev libffi-dev bison flex libboost-dev libboost-iostreams-dev libboost-filesystem-dev libboost-thread-dev libboost-program-options-dev libeigen3-dev
+```
 
 If manually compiling, all ``make`` commands can be parallelized using ``make -j$(ncpu)`` after setting ``ncpu`` to the appropriate value (e.g. number of CPU cores)
 
 ## yosys:
 
-The prefered solution is to use the packaged binary, i.e. for Debian GNU/Linux
-``sudo apt install yosys yosys-plugin-ghdl``. If not available, then assuming the dependencies
+The preferred solution is to use the packaged binary, i.e. for Debian GNU/Linux sid
+``sudo apt install yosys yosys-dev yosys-plugin-ghdl``. If not available (e.g. on Debian GNU/Linux stable or testing), 
+then assuming the dependencies 
 ``sudo apt install tcl8.6-dev libreadline-dev libffi-dev bison flex`` is met:
 
 ```sh
@@ -65,7 +71,7 @@ sudo make ALLOW_ROOT=1 install
 ./download-latest-db.sh
 sudo mkdir -p /usr/share/nextpnr
 sudo cp -r database /usr/share/nextpnr/prjxray-db
-pip3 install --user -r requirements.txt --break-system-packages
+pip3 install --user -r requirements.txt # for Debian: add --break-system-packages # add --use-pep517 for Ubuntu
 cd ../
 ```
 
@@ -92,11 +98,19 @@ cd ../
 
 ## openFPGAloader:
 
-The prefered solution is to use the packaged binary, i.e. for Debian GNU/Linux
+The preferred solution is to use the packaged binary, i.e. for Debian GNU/Linux
 ``sudo apt install openfpgaloader``. If not available, follow instructions at
 https://github.com/trabucayre/openFPGALoader
 
-The JTAG pinout of the Redpitaya is given at https://redpitaya.readthedocs.io/en/latest/_images/JTAG_pins.jpg and is compatible with the Digilent HS2 probe. For transfering the bitstream to the PL of the Zynq: ``openFPGALoader -c digilent_hs2 mybitstream.bit``
+The JTAG pinout of the Redpitaya is given at <a href="https://redpitaya.readthedocs.io/en/latest/_images/JTAG_pins.jpg">this image</a> and is compatible with the Digilent HS2 probe. For transfering the bitstream to the PL of the Zynq:
+```bash
+openFPGALoader -c digilent_hs2 mybitstream.bit
+```
 
+## Update PATH
 
-https://downloads.intel.com/akdlm/software/acdsinst/13.1/162/ib_tar/Quartus-web-13.1.0.162-linux.tar
+Once all tools are installed, make sure to update the PATH with ``/usr/local/bin`` and ``$HOME/.local/bin`` e.g. using
+```sh
+export PATH=$PATH:/usr/local/bin:$HOME/.local/bin
+```
+which can be added to ``.bashrc`` to make the modification permanent.
