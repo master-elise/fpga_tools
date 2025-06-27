@@ -109,8 +109,8 @@ clean_repo() {
 build_yosys() {
 	repo=$1
 	pushd $repo
-    make -j$(nproc)
-    make install PREFIX=$INSTALL_PREFIX
+	make -j$(nproc)
+	make install PREFIX=$INSTALL_PREFIX
 	popd
 }
 
@@ -188,7 +188,7 @@ else
 		build_prjxray="true"
 		build_nextpnr="true"
 	else
-		for tgt in $1; do
+		for tgt in $@; do
 			if [[ $tgt == "yosys" ]]; then
 				build_yosys="true"
 			fi
@@ -208,8 +208,8 @@ check_dependencies
 # YOSYS
 if [[ $build_yosys == "true" ]]; then
 	git_clone_update yosys $YOSYS_HASH
-	#clean_repo yosys
-	#build_yosys yosys
+	clean_repo yosys
+	build_yosys yosys
 fi
 
 # PRJXRAY + PRJXRAY-DB + FASM
