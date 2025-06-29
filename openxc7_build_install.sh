@@ -18,7 +18,7 @@ DEPENDENCIES="$DEPENDENCIES python3-pytest-runner python3-scipy python3-simplejs
 
 # Tools commit hash.
 # Yosys
-YOSYS_HASH=yosys-0.38
+YOSYS_HASH=yosys-0.44
 # nextpnr xilinx (stable-backports 2025-03-10)
 NEXTPNR_XILINX_HASH=3374e5a62b54dc346fd5f85188ed24075ddfd5fb
 NEXTPNR_XILINX_HASH=0.8.2
@@ -26,6 +26,8 @@ NEXTPNR_XILINX_HASH=0.8.2
 PRJXRAY_HASH=ce065d470ea9547bba97b9df4476a0148e728c95
 # prjxray-db (master 2025-02-19)
 PRJXRAY_DB_HASH=0.8.2
+
+nproc=12
 
 check_dependencies() {
 	dep_install=""
