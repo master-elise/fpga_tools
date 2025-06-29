@@ -1,5 +1,5 @@
 PRJ    = encaps_TP1
-VHDL_BIBLI = seven_seg.vhd compt10s.vhd
+VHDL_BIBLI = compt10s.vhd
 V_LIST = encaps_TP1.v
 CONSTR = ./ports.xdc
 
@@ -35,5 +35,5 @@ load: $(PRJ).bit
 	openFPGALoader -c digilent_hs2 $(PRJ).bit
 
 clean:
-	-rm -f *.rpt *.log *.json* *_synth.v *.place *.eblif *.fasm *.ioplace *.net
+	-rm -f *.rpt *.log *.json* *_synth.v *.place *.eblif *.fasm *.ioplace *.net $(V_LIST)
 	-rm -f *.net.post_routing *.route *.premap.v *.frames *.bit

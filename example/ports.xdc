@@ -365,4 +365,3 @@ set_property IOSTANDARD LVCMOS33 [get_ports led_o[4]]
 set_property IOSTANDARD LVCMOS33 [get_ports led_o[5]]
 set_property IOSTANDARD LVCMOS33 [get_ports led_o[6]]
 set_property IOSTANDARD LVCMOS33 [get_ports led_o[7]]
-
