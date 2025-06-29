@@ -3,7 +3,7 @@
 The complete yosys installation is 4.7 GB when Vivado/Vitis 2024 requires downloading 18 GB 
 and installing 70 GB !
 
-## Notice: PL (FPGA) only, no access to PS (CPU) with these tools. See <a href="https://fosdem.org/2025/schedule/event/fosdem-2025-4850-all-open-source-toolchain-for-zynq-7000-socs/">GenZ and OpenXC7 (FOSDEM presentation)</a> for PS access with opensource tools (see bottom).
+## Notice: PL (FPGA) only, no access to PS (CPU) with these tools. See <a href="https://fosdem.org/2025/schedule/event/fosdem-2025-4850-all-open-source-toolchain-for-zynq-7000-socs/">GenZ and OpenXC7 (FOSDEM presentation)</a> for PS access with opensource tools (see [bottom](#bottom))
 
 Tools: GHDL and GTKWave as binary packages, e.g. ``sudo apt install ghdl ghdl-gcc gtkwave``. Some additional dependencies found in this document are
 ```bash
@@ -116,6 +116,7 @@ export PATH=$PATH:/usr/local/bin:$HOME/.local/bin
 which can be added to ``.bashrc`` to make the modification permanent.
 
 ## Opensource tools for PS access
+<a name="bottom"></a>
 
 Gwenhael Goavec-Merou has contributed <a href="openxc7_build_install.sh">this script</a>
 automating the compilation of the OpenXC7 branch of the tools *which are not the same branch* 
