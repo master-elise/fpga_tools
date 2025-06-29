@@ -12,6 +12,11 @@ sudo apt install tcl-dev libffi-dev bison flex libboost-dev libboost-iostreams-d
 
 If manually compiling, all ``make`` commands can be parallelized using ``make -j$(ncpu)`` after setting ``ncpu`` to the appropriate value (e.g. number of CPU cores)
 
+**WARNING**: yosys/nextpnr-xilinx seem to have version conflict issues. The
+installation sequence below is using the lates ``master`` branch of all 
+repositories, possibly mixing with binary distribution version, leading to
+too many combinations to sort out. Maybe safer is the ``openxc7_build_install.sh`` script which makes sure to checkout know functional versions of each tool.
+
 ## yosys:
 
 The preferred solution is to use the packaged binary, i.e. for Debian GNU/Linux sid
