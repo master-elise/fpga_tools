@@ -15,7 +15,7 @@ If manually compiling, all ``make`` commands can be parallelized using ``make -j
 **WARNING**: yosys/nextpnr-xilinx seem to have version conflict issues. The
 installation sequence below is using the lates ``master`` branch of all 
 repositories, possibly mixing with binary distribution version, leading to
-too many combinations to sort out. Maybe safer is the ``openxc7_build_install.sh`` script which makes sure to checkout know functional versions of each tool.
+too many combinations to sort out. Maybe safer is the ``openxc7_build_install.sh`` script which makes sure to checkout known functional versions of each tool.
 
 ## yosys:
 
@@ -27,6 +27,7 @@ then assuming the dependencies
 ```sh
 git clone https://github.com/YosysHQ/yosys.git
 cd yosys
+git checkout yosys-0.44     # make sure to use a trusted version
 git submodule update --init
 make
 sudo make install
