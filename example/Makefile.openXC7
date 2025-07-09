@@ -1,0 +1,59 @@
+PRJ    = encaps_TP1
+VHDL_BIBLI = seven_seg.vhd compt10s.vhd
+V_LIST = encaps_TP1.v
+CONSTR = ./ports.xdc
+
+DEVICE = zynq7
+PART   = xc7z010clg400-1
+DBPART = $(shell echo ${PART} | sed -e 's/-[0-9]//g')
+SPEEDGRADE = $(shell echo ${PART} | sed -e 's/.*\-\([0-9]\)/\1/g')
+
+CHIPDB ?= ../chipdb/
+ifeq ($(CHIPDB),)
+CHIPDB = ../chipdb/
+endif
+
+PYPY3 = pypy3
+
+GHDL_OPT = --synth  --out=verilog --std=08 --no-formal
+
+#YOSYS_OPT=-q -p "scratchpad -set xilinx_dsp.multonly 1"
+YOSYS_OPT=-q -p "synth_xilinx -flatten -abc9 -arch xc7 -top $(PRJ); write_json $(PRJ).json"
+
+
+all: $(PRJ).bit
+$(PRJ).v: $(PRJ).vhd $(VHDL_BIBLI)
+	# obsolete
+	#yosys -m ghdl -p 'ghdl --std=08 $(VHDL_BIBLI) $(PRJ).vhd -e $(PRJ); write_verilog $(PRJ).v'
+	# new with recent ghdl
+	ghdl $(GHDL_OPT) $^ $(PRJ).vhd -e $(PRJ) > $@
+
+$(PRJ).json: $(V_LIST)
+	yosys ${YOSYS_OPT} ${V_LIST}
+
+# The chip database only needs to be generated once
+# that is why we don't clean it with make clean
+$(CHIPDB)/$(DBPART).bin:
+	mkdir -p $(CHIPDB)
+	${PYPY3} ${NEXTPNR_XILINX_PYTHON_DIR}/bbaexport.py --device ${PART} --bba ${DBPART}.bba
+	bbasm -l ${DBPART}.bba ${CHIPDB}/${DBPART}.bin
+	rm -f ${DBPART}.bba
+	
+$(PRJ).fasm: $(PRJ).json $(CHIPDB)/$(DBPART).bin $(CONSTR)
+	nextpnr-xilinx --chipdb ${CHIPDB}/$(DBPART).bin --xdc $(CONSTR) \
+		--json ${PRJ}.json --write ${PRJ}_routed.json --fasm ${PRJ}.fasm
+
+$(PRJ).frames: $(PRJ).fasm
+	fasm2frames --part ${PART} --db-root ${PRJXRAY_DB_DIR}/$(DEVICE) ${PRJ}.fasm > ${PRJ}.frames
+
+$(PRJ).bit: $(PRJ).frames
+	xc7frames2bit --part_file ${PRJXRAY_DB_DIR}/$(DEVICE)/${PART}/part.yaml --part_name ${PART} \
+		--frm_file ${PRJ}.frames --output_file ${PRJ}.bit
+
+load: $(PRJ).bit
+	openFPGALoader -c digilent_hs2 $(PRJ).bit
+
+clean:
+	-rm -f *.rpt *.log *.json* *_synth.v *.place *.eblif *.fasm *.ioplace *.net
+	-rm -f *.net.post_routing *.route *.premap.v *.frames *.bit
+	-rm -f $(PRJ).v
