@@ -27,6 +27,8 @@ PRJXRAY_HASH=ce065d470ea9547bba97b9df4476a0148e728c95
 # prjxray-db (master 2025-02-19)
 PRJXRAY_DB_HASH=0.8.2
 
+nproc=12
+
 check_dependencies() {
 	dep_install=""
 	for package in $DEPENDENCIES; do

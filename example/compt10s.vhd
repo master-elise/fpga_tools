@@ -30,6 +30,8 @@ BEGIN
 		end if;
                 led_o <= (others => '0');
                 led_o(compteur10) <= '1';
+-- led_o <= led_o(6 downto 0) & led_o(7);
+-- led_o <= led_o(to_integer(unsigned(vecteur,3))) <= '1';
 	end process;
 	Q <= std_logic_vector(to_unsigned(compteur10,4));
 END a;

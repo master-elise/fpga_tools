@@ -3,7 +3,7 @@
 The complete yosys installation is 4.7 GB when Vivado/Vitis 2024 requires downloading 18 GB 
 and installing 70 GB !
 
-## Notice: PL (FPGA) only, no access to PS (CPU) with these tools. See <a href="https://fosdem.org/2025/schedule/event/fosdem-2025-4850-all-open-source-toolchain-for-zynq-7000-socs/">GenZ and OpenXC7 (FOSDEM presentation)</a> for PS access with opensource tools (see bottom).
+## Notice: PL (FPGA) only, no access to PS (CPU) with these tools. See <a href="https://fosdem.org/2025/schedule/event/fosdem-2025-4850-all-open-source-toolchain-for-zynq-7000-socs/">GenZ and OpenXC7 (FOSDEM presentation)</a> for PS access with opensource tools (see [bottom](#bottom))
 
 Tools: GHDL and GTKWave as binary packages, e.g. ``sudo apt install ghdl ghdl-gcc gtkwave``. Some additional dependencies found in this document are
 ```bash
@@ -11,6 +11,11 @@ sudo apt install tcl-dev libffi-dev bison flex libboost-dev libboost-iostreams-d
 ```
 
 If manually compiling, all ``make`` commands can be parallelized using ``make -j$(ncpu)`` after setting ``ncpu`` to the appropriate value (e.g. number of CPU cores)
+
+**WARNING**: yosys/nextpnr-xilinx seem to have version conflict issues. The
+installation sequence below is using the lates ``master`` branch of all 
+repositories, possibly mixing with binary distribution version, leading to
+too many combinations to sort out. Maybe safer is the ``openxc7_build_install.sh`` script which makes sure to checkout known functional versions of each tool.
 
 ## yosys:
 
@@ -22,6 +27,7 @@ then assuming the dependencies
 ```sh
 git clone https://github.com/YosysHQ/yosys.git
 cd yosys
+git checkout yosys-0.44     # make sure to use a trusted version
 git submodule update --init
 make
 sudo make install
@@ -116,6 +122,7 @@ export PATH=$PATH:/usr/local/bin:$HOME/.local/bin
 which can be added to ``.bashrc`` to make the modification permanent.
 
 ## Opensource tools for PS access
+<a name="bottom"></a>
 
 Gwenhael Goavec-Merou has contributed <a href="openxc7_build_install.sh">this script</a>
 automating the compilation of the OpenXC7 branch of the tools *which are not the same branch* 

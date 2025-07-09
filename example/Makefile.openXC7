@@ -1,5 +1,5 @@
 PRJ    = encaps_TP1
-VHDL_BIBLI = seven_seg.vhd compt10s.vhd
+VHDL_BIBLI = compt10s.vhd
 V_LIST = encaps_TP1.v
 CONSTR = ./ports.xdc
 
