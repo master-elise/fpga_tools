@@ -17,7 +17,7 @@ installation sequence below is using the lates ``master`` branch of all
 repositories, possibly mixing with binary distribution version, leading to
 too many combinations to sort out. Maybe safer is the ``openxc7_build_install.sh`` script which makes sure to checkout known functional versions of each tool.
 
-## yosys:
+### yosys:
 
 The preferred solution is to use the packaged binary, i.e. for Debian GNU/Linux sid
 ``sudo apt install yosys yosys-dev yosys-plugin-ghdl``. If not available (e.g. on Debian GNU/Linux stable or testing), 
@@ -51,7 +51,7 @@ sudo make install
 cd ../
 ```
 
-## ghdl-yosys-plugin:
+### ghdl-yosys-plugin:
 
 ``sudo apt install libghdl-dev`` to meet dependencies, and
 
@@ -64,7 +64,7 @@ sudo cp ghdl.so /usr/local/share/yosys/plugins/
 cd ../
 ```
 
-## prjxray:
+### prjxray:
 
 This directory will be needed even after completing ``make install`` so perform
 these compilation steps in a directory you will keep (e.g. *not* in ``/tmp`` !)
@@ -81,7 +81,7 @@ pip3 install --user -r requirements.txt # for Debian: add --break-system-package
 cd ../
 ```
 
-## nextpnr-xilinx:
+### nextpnr-xilinx:
 
 Depends on the ``libboost-iostreams-dev`` package:
 
@@ -102,7 +102,7 @@ sudo cp xilinx/xc7z010.bin /usr/share/nextpnr/xilinx-chipdb/
 cd ../
 ```
 
-## openFPGAloader:
+### openFPGAloader:
 
 The preferred solution is to use the packaged binary, i.e. for Debian GNU/Linux
 ``sudo apt install openfpgaloader``. If not available, follow instructions at
@@ -113,7 +113,7 @@ The JTAG pinout of the Redpitaya is given at <a href="https://redpitaya.readthed
 openFPGALoader -c digilent_hs2 mybitstream.bit
 ```
 
-## Update PATH
+### Update PATH
 
 Once all tools are installed, make sure to update the PATH with ``/usr/local/bin`` and ``$HOME/.local/bin`` e.g. using
 ```sh
