@@ -134,4 +134,9 @@ source /opt/openxc7/export.sh
 ```
 before using these tools by selecting the appropriate paths.
 
+For NFS compatible installation:
+* make sure the patch https://github.com/openXC7/prjxray/pull/3 is installed and that the package ``python3-flufl.lock`` is installed
+* make sure the directories ``.../openxc7/share/nextpnr/prjxray-db/zynq7/`` and ``.../openxc7/share/nextpnr/prjxray-db/zynq7/mapping`` are world writable (``chmod 777``) to allow for lock file creation by other users
+* the content of ``$HOME/.local`` of the user who installed openXC7 on the NFS server is copied to the user ``.local`` (to avoid the error ``importlib.metadata.PackageNotFoundError: No package metadata was found for prjxray``)
+
 Tested with the examples found at https://github.com/openXC7/demo-projects
