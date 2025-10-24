@@ -22,8 +22,11 @@ For NFS compatible installation:
 * make sure the directories ``.../openxc7/share/nextpnr/prjxray-db/zynq7/`` and ``.../openxc7/share/nextpnr/prjxray-db/zynq7/mapping`` are world writable (``chmod 777``) to allow for lock file creation by other users
 * the content of ``$HOME/.local`` of the user who installed openXC7 on the NFS server is copied to the user ``.local`` (to avoid the error ``importlib.metadata.PackageNotFoundError: No package metadata was found for prjxray``)
 
-Tested with the examples found at https://github.com/openXC7/demo-projects
-
+Tested with the examples found at https://github.com/openXC7/demo-projects: make sure to
+```
+make -f Makefile.openXC7
+```
+to compile these examples with the OpenXC7 toolchain.
 ## Legacy: manual compilation of the tools. PL (FPGA) only, no access to PS (CPU) with these tools. 
 
 Take care that not all version combinations are functional. Below we do *not* checkout a given version, always using the latest github master branch. This combination can lead to a non-functional set of tools.
