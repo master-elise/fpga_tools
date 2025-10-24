@@ -3,7 +3,30 @@
 The complete yosys installation is 4.7 GB when Vivado/Vitis 2024 requires downloading 18 GB 
 and installing 70 GB !
 
-## Notice: PL (FPGA) only, no access to PS (CPU) with these tools. See <a href="https://fosdem.org/2025/schedule/event/fosdem-2025-4850-all-open-source-toolchain-for-zynq-7000-socs/">GenZ and OpenXC7 (FOSDEM presentation)</a> for PS access with opensource tools (see [bottom](#bottom))
+## Opensource tools allowing for PS (CPU) access
+
+See <a href="https://fosdem.org/2025/schedule/event/fosdem-2025-4850-all-open-source-toolchain-for-zynq-7000-socs/">GenZ and OpenXC7 (FOSDEM presentation)</a>.
+
+Gwenhael Goavec-Merou has contributed <a href="openxc7_build_install.sh">this script</a>
+automating the compilation of the OpenXC7 branch of the tools *which are not the same branch* 
+than selected below. 
+
+Once compilation is completed, always
+```
+source /opt/openxc7/export.sh
+```
+before using these tools by selecting the appropriate paths.
+
+For NFS compatible installation:
+* make sure the patch https://github.com/openXC7/prjxray/pull/3 is installed and that the package ``python3-flufl.lock`` is installed
+* make sure the directories ``.../openxc7/share/nextpnr/prjxray-db/zynq7/`` and ``.../openxc7/share/nextpnr/prjxray-db/zynq7/mapping`` are world writable (``chmod 777``) to allow for lock file creation by other users
+* the content of ``$HOME/.local`` of the user who installed openXC7 on the NFS server is copied to the user ``.local`` (to avoid the error ``importlib.metadata.PackageNotFoundError: No package metadata was found for prjxray``)
+
+Tested with the examples found at https://github.com/openXC7/demo-projects
+
+## Legacy: manual compilation of the tools. PL (FPGA) only, no access to PS (CPU) with these tools. 
+
+Take care that not all version combinations are functional. Below we do *not* checkout a given version, always using the latest github master branch. This combination can lead to a non-functional set of tools.
 
 Tools: GHDL and GTKWave as binary packages, e.g. ``sudo apt install ghdl ghdl-gcc gtkwave``. Some additional dependencies found in this document are
 ```bash
@@ -120,23 +143,3 @@ Once all tools are installed, make sure to update the PATH with ``/usr/local/bin
 export PATH=$PATH:/usr/local/bin:$HOME/.local/bin
 ```
 which can be added to ``.bashrc`` to make the modification permanent.
-
-## Opensource tools for PS access
-<a name="bottom"></a>
-
-Gwenhael Goavec-Merou has contributed <a href="openxc7_build_install.sh">this script</a>
-automating the compilation of the OpenXC7 branch of the tools *which are not the same branch* 
-than selected above. 
-
-Once compilation is completed, always
-```
-source /opt/openxc7/export.sh
-```
-before using these tools by selecting the appropriate paths.
-
-For NFS compatible installation:
-* make sure the patch https://github.com/openXC7/prjxray/pull/3 is installed and that the package ``python3-flufl.lock`` is installed
-* make sure the directories ``.../openxc7/share/nextpnr/prjxray-db/zynq7/`` and ``.../openxc7/share/nextpnr/prjxray-db/zynq7/mapping`` are world writable (``chmod 777``) to allow for lock file creation by other users
-* the content of ``$HOME/.local`` of the user who installed openXC7 on the NFS server is copied to the user ``.local`` (to avoid the error ``importlib.metadata.PackageNotFoundError: No package metadata was found for prjxray``)
-
-Tested with the examples found at https://github.com/openXC7/demo-projects
