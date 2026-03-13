@@ -8,7 +8,7 @@ CMAKE_OPTS="-DCMAKE_INSTALL_PREFIX=$INSTALL_PREFIX"
 
 # Tools dependencies.
 DEPENDENCIES="cmake default-jre-headless uuid-dev libantlr4-runtime-dev tcl8.6-dev libreadline-dev"
-DEPENDENCIES="$DEPENDENCIES python3-setuptools cython3"
+DEPENDENCIES="$DEPENDENCIES python3-setuptools cython3 bison"
 DEPENDENCIES="$DEPENDENCIES libboost-iostreams-dev libboost-thread-dev libboost-program-options-dev"
 DEPENDENCIES="$DEPENDENCIES libboost-python-dev libeigen3-dev"
 # pip / prjxray
@@ -175,7 +175,7 @@ if [ ! -d $INSTALL_PREFIX ]; then
     sudo chown -R $UID:$GROUPS $INSTALL_PREFIX
 fi
 
-# check if everything must be build or only one step.
+# check if everything must be built or only one step.
 build_yosys="false"
 build_prjxray="false"
 build_nextpnr="false"
