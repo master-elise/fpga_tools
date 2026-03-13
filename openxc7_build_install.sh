@@ -7,7 +7,7 @@ INSTALL_PREFIX=/opt/openxc7
 CMAKE_OPTS="-DCMAKE_INSTALL_PREFIX=$INSTALL_PREFIX"
 
 # Tools dependencies.
-DEPENDENCIES="cmake default-jre-headless uuid-dev libantlr4-runtime-dev"
+DEPENDENCIES="cmake default-jre-headless uuid-dev libantlr4-runtime-dev tcl8.6-dev libreadline-dev"
 DEPENDENCIES="$DEPENDENCIES python3-setuptools cython3"
 DEPENDENCIES="$DEPENDENCIES libboost-iostreams-dev libboost-thread-dev libboost-program-options-dev"
 DEPENDENCIES="$DEPENDENCIES libboost-python-dev libeigen3-dev"
@@ -139,40 +139,40 @@ build_nextpnr() {
     cmake $CMAKE_OPTS -DARCH=xilinx -DUSE_OPENMP=ON -DBUILD_GUI=OFF ..
     make -j$(nproc)
     make install
-	cp bbasm $INSTALL_PREFIX/bin
-	#cp ../xilinx/python/bbaexport.py $INSTALL_PREFIX/bin/bbaexport
-	cp ../xilinx/constids.inc $INSTALL_PREFIX/lib/
-	cp ../xilinx/constids.inc ../xilinx/python/* $INSTALL_PREFIX/lib/python/
-	cp -r ../xilinx/external $INSTALL_PREFIX/lib/external
-	popd 
+    cp bbasm $INSTALL_PREFIX/bin
+    #cp ../xilinx/python/bbaexport.py $INSTALL_PREFIX/bin/bbaexport
+    cp ../xilinx/constids.inc $INSTALL_PREFIX/lib/
+    cp ../xilinx/constids.inc ../xilinx/python/* $INSTALL_PREFIX/lib/python/
+    cp -r ../xilinx/external $INSTALL_PREFIX/lib/external
+    popd 
 }
 
 build_prjxray() {
-	pushd $1
-	mkdir -p build
-	pushd build
-	cmake $CMAKE_OPTS ..
+    pushd $1
+    mkdir -p build
+    pushd build
+    cmake $CMAKE_OPTS ..
     make -j$(nproc)
-	make install
-	popd
+    make install
+    popd
 
     #./download-latest-db.sh
     #[-d $INSTALL_PREFIX/share/nextpnr] || mkdir -p $INSTALL_PREFIX/share/nextpnr/prjxray-db
     #cp -r database/* $INSTALL_PREFIX/share/nextpnr/prjxray-db
-    pip3 install --user -r requirements.txt
-	popd
+    pip3 install --user -r requirements.txt --break-system-packages
+    popd
 }
 
 build_prjxray_db() {
-	pushd $1
+    pushd $1
     [ -d $INSTALL_PREFIX/share/nextpnr ] || mkdir -p $INSTALL_PREFIX/share/nextpnr/prjxray-db
     cp -fr * $INSTALL_PREFIX/share/nextpnr/prjxray-db
-	popd
+    popd
 }
 
 if [ ! -d $INSTALL_PREFIX ]; then
-	sudo mkdir -p $INSTALL_PREFIX
-	sudo chown -R $UID:$GROUPS $INSTALL_PREFIX
+    sudo mkdir -p $INSTALL_PREFIX
+    sudo chown -R $UID:$GROUPS $INSTALL_PREFIX
 fi
 
 # check if everything must be build or only one step.
@@ -181,27 +181,27 @@ build_prjxray="false"
 build_nextpnr="false"
 
 if [[ $# == 0 ]]; then
-	build_yosys="true"
-	build_prjxray="true"
-	build_nextpnr="true"
+    build_yosys="true"
+    build_prjxray="true"
+    build_nextpnr="true"
 else
-	if [[ $1 == "all" ]]; then
-		build_yosys="true"
-		build_prjxray="true"
-		build_nextpnr="true"
-	else
-		for tgt in $@; do
-			if [[ $tgt == "yosys" ]]; then
-				build_yosys="true"
-			fi
-			if [[ $tgt == "prjxray" ]]; then
-				build_prjxray="true"
-			fi
-			if [[ $tgt == "nextpnr" ]]; then
-				build_nextpnr="true"
-			fi
-		done
-	fi
+    if [[ $1 == "all" ]]; then
+        build_yosys="true"
+        build_prjxray="true"
+        build_nextpnr="true"
+    else
+        for tgt in $@; do
+            if [[ $tgt == "yosys" ]]; then
+                build_yosys="true"
+            fi
+            if [[ $tgt == "prjxray" ]]; then
+                build_prjxray="true"
+            fi
+            if [[ $tgt == "nextpnr" ]]; then
+                build_nextpnr="true"
+            fi
+        done
+    fi
 fi
 
 # Check/Install Dependencies
@@ -209,32 +209,32 @@ check_dependencies
 
 # YOSYS
 if [[ $build_yosys == "true" ]]; then
-	git_clone_update yosys $YOSYS_HASH
-	clean_repo yosys
-	build_yosys yosys
+    git_clone_update yosys $YOSYS_HASH
+    clean_repo yosys
+    build_yosys yosys
 fi
 
 # PRJXRAY + PRJXRAY-DB + FASM
 if [[ $build_prjxray == "true" ]]; then
-	git_clone_update prjxray
-	clean_repo prjxray
-	build_prjxray prjxray
+    git_clone_update prjxray
+    clean_repo prjxray
+    build_prjxray prjxray
 
-	git_clone_update prjxray-db $PRJXRAY_DB_HASH
-	build_prjxray_db prjxray-db
+    git_clone_update prjxray-db $PRJXRAY_DB_HASH
+    build_prjxray_db prjxray-db
 
-	build_fasm
+    build_fasm
 fi
 
 # NEXTPNR XILINX
 if [[ $build_nextpnr == "true" ]]; then
-	git_clone_update nextpnr-xilinx $NEXTPNR_XILINX_HASH
-	clean_repo nextpnr-xilinx
-	build_nextpnr nextpnr-xilinx
+    git_clone_update nextpnr-xilinx $NEXTPNR_XILINX_HASH
+    clean_repo nextpnr-xilinx
+    build_nextpnr nextpnr-xilinx
 fi
 
 if [ ! -d $INSTALL_PREFIX/export.sh ]; then
-	cat << EOF > $INSTALL_PREFIX/export.sh
+    cat << EOF > $INSTALL_PREFIX/export.sh
 export PYTHONPATH=$INSTALL_PREFIX/lib/python
 export PATH=$INSTALL_PREFIX/bin:\$PATH
 export NEXTPNR_XILINX_PYTHON_DIR=$INSTALL_PREFIX/lib/python
