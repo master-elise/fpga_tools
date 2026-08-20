@@ -1,3 +1,5 @@
+The ``toolchain-installer`` is now officially supported on the https://github.com/openXC7/toolchain-installer/ repository and supersedes the scripts on this web page.
+
 # Compiling free, opensource tools for programming Xilinx FPGAs (e.g. for the Zynq 7010 of the Redpitaya)
 
 The complete yosys installation is 4.7 GB when Vivado/Vitis 2024 requires downloading 18 GB 
