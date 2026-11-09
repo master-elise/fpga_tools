@@ -42,6 +42,10 @@ XDC ?= ${PROJECT}.xdc
 .PHONY: all
 all: ${PROJECT}.bit
 
+GHDL_OPT = --synth  --out=verilog --std=08 --no-formal
+${TOP_VERILOG}: ${PROJECT}.vhd ${VHDL_BIBLI}
+	ghdl ${GHDL_OPT} $^ ${PROJECT}.vhd -e ${PROJECT} > $@
+
 .PHONY: program
 program: ${PROJECT}.bit
 	openFPGALoader ${JTAG_LINK} --bitstream $<
@@ -128,7 +132,8 @@ clean:
 	@rm -f *.frames
 	@rm -f *.fasm
 	@rm -f *.json
+	@rm ${PROJECT}.v
 
 .PHONY: pnrclean
 pnrclean:
-	rm *.fasm *.frames *.bit
+	rm *.fasm *.frames *.bit ${PROJECT}.v
