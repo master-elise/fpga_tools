@@ -1,0 +1,3 @@
+[submodule "toolchain-installer"]
+	path = toolchain-installer
+	url = https://github.com/openXC7/toolchain-installer
