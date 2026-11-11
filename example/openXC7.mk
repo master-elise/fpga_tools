@@ -42,9 +42,13 @@ XDC ?= ${PROJECT}.xdc
 .PHONY: all
 all: ${PROJECT}.bit
 
+LANG ?= verilog
+
+ifeq ($(LANG),vhdl)
 GHDL_OPT = --synth  --out=verilog --std=08 --no-formal
-${TOP_VERILOG}: ${PROJECT}.vhd ${VHDL_BIBLI}
+${TOP_VERILOG}: ${PROJECT}.vhd ${VHDL_LIB}
 	ghdl ${GHDL_OPT} $^ ${PROJECT}.vhd -e ${PROJECT} > $@
+endif
 
 .PHONY: program
 program: ${PROJECT}.bit
@@ -128,12 +132,14 @@ ${PROJECT}.bit: ${PROJECT}.fasm
 
 .PHONY: clean
 clean:
-	@rm -f *.bit
-	@rm -f *.frames
-	@rm -f *.fasm
-	@rm -f *.json
-	@rm ${PROJECT}.v
+	rm -f *.bit
+	rm -f *.frames
+	rm -f *.fasm
+	rm -f *.json
+ifeq ($(LANG),vhdl)
+	rm ${PROJECT}.v
+endif
 
 .PHONY: pnrclean
 pnrclean:
-	rm *.fasm *.frames *.bit ${PROJECT}.v
+	rm *.fasm *.frames *.bit
