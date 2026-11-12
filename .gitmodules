@@ -1,3 +1,6 @@
 [submodule "toolchain-installer"]
 	path = toolchain-installer
 	url = https://github.com/openXC7/toolchain-installer
+[submodule "bootgen"]
+	path = bootgen
+	url = https://github.com/Xilinx/bootgen

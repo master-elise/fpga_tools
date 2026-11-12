@@ -6,3 +6,7 @@ CHIPDB  = ${ZYNQ7_CHIPDB}
 LANG    = verilog
 
 include ../example/openXC7.mk
+
+bitbin: ${PROJECT}.bit
+	../bootgen/build/bin/bootgen -image ps7_axi_blinky.bif -arch zynq -process_bitstream bin
+
