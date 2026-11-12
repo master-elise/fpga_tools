@@ -3,7 +3,7 @@
  
 module ps7_axi_blinky(
 	input clk,
-	output [3:0]led,
+	output [7:0]led,
 	input [1:0]sw
     );
 
@@ -106,7 +106,7 @@ module ps7_axi_blinky(
 		.gpio2_t()
 	);
 
-	assign led[3:0] = gpio_o[3:0];
+	assign led[7:0] = gpio_o[7:0];
 	assign gpio_i = {26'b0, sw, 4'b0};
 
     PS7 zynq7 (
