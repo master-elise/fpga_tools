@@ -1,8 +1,9 @@
 # Opensource synthesis tools:
 
-Artix7/Zynq7010 (Red Pitaya): the ``toolchain-installer`` is now officially supported on the https://github.com/openXC7/toolchain-installer/ repository and supersedes the scripts on this web page.
+Artix7/Zynq7010 (Red Pitaya): the ``toolchain-installer`` is now officially supported on the https://github.com/openXC7/toolchain-installer/ repository.
 
-Gatemate: https://github.com/trabucayre/GateMate_demos includes ``toolchain-sources-builder.sh``
+Gatemate: https://github.com/trabucayre/GateMate_demos includes ``toolchain-sources-builder.sh`` for
+the Cologne Chip.
 
 ## Compiling free, opensource tools for programming Xilinx FPGAs (e.g. for the Zynq 7010 of the Redpitaya)
 
